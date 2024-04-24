@@ -9,12 +9,14 @@
 obj/main.o
 obj/Termination.o
 obj/Core/Processor.o
+obj/Core/Vector.o
 
 
 # Ignore dependency files
 obj/main.d
 obj/Termination.d
 obj/Core/Processor.d
+obj/Core/Vector.d
 
 
 # Ignore binary files

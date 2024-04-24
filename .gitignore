@@ -1,0 +1,38 @@
+##
+## EPITECH PROJECT, 2024
+## Raytracer
+## File description:
+## .gitignore
+##
+
+# Ignore object files
+obj/main.o
+obj/Core/Processor.o
+
+
+# Ignore dependency files
+obj/main.d
+obj/Core/Processor.d
+
+
+# Ignore binary files
+raytracer
+raytracer_tests
+a.out
+
+# Ignore logs and reports
+*.gc*
+vgcore.*
+
+# Ignore coding-style logs
+coding-style-reports.log
+
+# Ignore temporary files
+*tmp*
+*~
+\#*#
+.#*
+*.swp
+
+# Miscellanous
+compile_commands.json

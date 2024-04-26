@@ -45,6 +45,8 @@ $(NAME)_SRCS			:=	$(addprefix $(SRC_DIR), $(addsuffix $(SRC_EXT),	\
 									Processor Vector)						\
 								$(addprefix Lights/,						\
 									AmbientLight)							\
+								$(addprefix Configuration/,					\
+									DefaultConfiguration)					\
 							))
 
 CODING_STYLE_LOG		:=	coding-style-reports.log

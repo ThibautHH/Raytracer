@@ -11,6 +11,7 @@ obj/Termination.o
 obj/Core/Processor.o
 obj/Core/Vector.o
 obj/Lights/AmbientLight.o
+obj/Configuration/DefaultConfiguration.o
 
 
 # Ignore dependency files
@@ -19,6 +20,7 @@ obj/Termination.d
 obj/Core/Processor.d
 obj/Core/Vector.d
 obj/Lights/AmbientLight.d
+obj/Configuration/DefaultConfiguration.d
 
 
 # Ignore binary files

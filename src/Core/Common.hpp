@@ -37,6 +37,10 @@ namespace Raytracer::Core {
                 : r(red), g(green), b(blue), a(alpha)
             {}
 
+            ColorShift(const Color &color, float alpha = 1.0f)
+                : r(color.r / 255.0f), g(color.g / 255.0f), b(color.b / 255.0f), a(alpha)
+            {}
+
             const float r, g, b, a;
     };
 }

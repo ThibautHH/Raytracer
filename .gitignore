@@ -7,11 +7,13 @@
 
 # Ignore object files
 obj/main.o
+obj/Termination.o
 obj/Core/Processor.o
 
 
 # Ignore dependency files
 obj/main.d
+obj/Termination.d
 obj/Core/Processor.d
 
 

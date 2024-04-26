@@ -39,6 +39,7 @@ $(NAME)_TESTS			:=	$(NAME)_tests
 
 $(NAME)_MAIN_SRC		:=	$(SRC_DIR)main$(SRC_EXT)
 $(NAME)_SRCS			:=	$(addprefix $(SRC_DIR), $(addsuffix $(SRC_EXT),	\
+								Termination									\
 								$(addprefix Core/,							\
 									Processor)								\
 							))

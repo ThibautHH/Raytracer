@@ -9,7 +9,8 @@
 
 using namespace Raytracer::Core;
 
-Processor::Processor(const char *)
+Processor::Processor(std::unique_ptr<const Configuration::IConfiguration> configuration)
+    : _configuration(std::move(configuration))
 {
 }
 

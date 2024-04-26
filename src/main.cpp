@@ -16,7 +16,7 @@ int main(int argc, char **argv)
         return 84;
     }
 
-    Raytracer::Core::Processor(argv[1]).render();
+    Raytracer::Core::Processor(nullptr).render();
 
     return 0;
 }

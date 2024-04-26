@@ -8,12 +8,19 @@
 #ifndef RAYTRACER_CORE_PROCESSOR_HPP_
     #define RAYTRACER_CORE_PROCESSOR_HPP_
 
+    #include <memory>
+
+    #include "../Configuration/IConfiguration.hpp"
+
 namespace Raytracer::Core {
     class Processor {
         public:
-            Processor(const char *configFile);
+            Processor(std::unique_ptr<const Configuration::IConfiguration> configuration);
 
             void render();
+
+        private:
+            const std::unique_ptr<const Configuration::IConfiguration> _configuration;
     };
 }
 

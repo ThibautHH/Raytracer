@@ -15,6 +15,7 @@
  */
 class Termination {
     private:
+        static constexpr const char ProgramName[] = "Raytracer";
         static const std::terminate_handler DefaultTerminateHandler;
         static void terminate();
 };

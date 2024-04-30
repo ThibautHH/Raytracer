@@ -25,7 +25,7 @@ void Termination::terminate()
         const std::unique_ptr<char, decltype(std::free) *> name(
             abi::__cxa_demangle(rawName, nullptr, nullptr, &status),
             std::free);
-        std::cerr << "Raytracer terminated after throwing an instance of '" << (name ? name.get() : rawName)
+        std::cerr << ProgramName << " terminated after throwing an instance of '" << (name ? name.get() : rawName)
             << "'\n  what(): " << e.what() << std::endl;
         std::exit(84);
     } catch (...) {

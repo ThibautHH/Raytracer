@@ -23,14 +23,14 @@ jobs:
             done
           fi
 
-  check_program_compilation:
+  compile-program:
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile program
+      - name: Make
         timeout-minutes: 2
         run: |
           make
@@ -39,7 +39,7 @@ jobs:
         run: |
           make clean
 
-      - name: Check if executables are present
+      - name: Check for executables
         run: |
           for executable in "$EXECUTABLES"; do
             [ -f "$executable" ] && [ -x "$executable" ] && continue

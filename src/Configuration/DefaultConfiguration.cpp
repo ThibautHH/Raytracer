@@ -10,6 +10,14 @@
 using namespace Raytracer;
 using namespace Raytracer::Configuration;
 
+template<typename T, typename ... Types>
+std::list<std::unique_ptr<T>> DefaultConfiguration::init(Types&& ... values)
+{
+    std::list<std::unique_ptr<T>> container;
+    (container.emplace_back(std::forward<Types>(values)), ...);
+    return container;
+}
+
 const Core::ColorShift &DefaultConfiguration::getBackground() const noexcept
 {
     return _background;

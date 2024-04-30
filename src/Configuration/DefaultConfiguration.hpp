@@ -31,12 +31,15 @@ namespace Raytracer::Configuration {
             const std::list<std::unique_ptr<Lights::ILight>> &getLights() const noexcept final;
 
         private:
+            template<typename T, typename ... Types>
+            static std::list<std::unique_ptr<T>> init(Types&& ... values);
+
             const Core::ColorShift _background = Core::ColorShift(0.f, 0.f, 0.f);
             const Core::Camera _camera = Core::Camera(Core::Vector(0.f, 0.f, 10.f), Core::Vector(0.f, -0.5f, 0.f));
             const std::list<std::unique_ptr<Primitives::IPrimitive>> _primitives;
-            const std::list<std::unique_ptr<Lights::ILight>> _lights = {
-                std::make_unique<Lights::AmbientLight>(Core::Color(1.f, 1.f, 1.f), 0.5f)
-            };
+            const std::list<std::unique_ptr<Lights::ILight>> _lights = DefaultConfiguration::init<Lights::ILight>(
+                std::make_unique<Lights::AmbientLight>(Core::Color(128, 128, 128))
+            );
     };
 }
 

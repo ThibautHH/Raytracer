@@ -5,23 +5,32 @@
 ** Sphere
 */
 
-#ifndef SPHERE_HPP_
-    #define SPHERE_HPP_
+#ifndef RAYTRACER_PRIMITIVES_SPHERE_HPP_
+    #define RAYTRACER_PRIMITIVES_SPHERE_HPP_
 
     #include "IPrimitive.hpp"
 
 using namespace Raytracer::Core;
 
 namespace Raytracer::Primitives {
+    class hit_record {
+        public:
+            Vector p;
+            Vector normal;
+            float t;
+    };
+
     class Sphere : public IPrimitive {
         public:
-            Sphere(const Vector &center, double radius);
+            Sphere(const Vector &center, float radius);
             ~Sphere();
+
+            bool hit(const Ray &ray, float t_min, float t_max, hit_record &hitrecord);
 
         private:
             Vector center;
-            double radius;
+            float radius;
 
     };
 }
-#endif /* !SPHERE_HPP_ */
+#endif /* !RAYTRACER_PRIMITIVES_SPHERE_HPP_ */

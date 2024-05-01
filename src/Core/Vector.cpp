@@ -35,6 +35,11 @@ Vector Vector::operator/(float scalar) const
     return Vector(x / scalar, y / scalar, z / scalar);
 }
 
+Vector Vector::operator=(const Vector &other)
+{
+    return Vector(other.x, other.y, other.z);
+}
+
 Vector Vector::cross(const Vector &other) const
 {
     return Vector(
@@ -57,6 +62,16 @@ float Vector::angle(const Vector &other) const
 float Vector::length() const
 {
     return std::sqrt(x * x + y * y + z * z);
+}
+
+float Vector::length_squared() const
+{
+    return x * x + y * y + z * z;
+}
+
+Vector Vector::unit_vector(const Vector &v) const
+{
+    return v / v.length();
 }
 
 Vector Vector::normalize() const

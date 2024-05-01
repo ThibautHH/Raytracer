@@ -14,16 +14,24 @@ namespace Raytracer::Core {
 
         const float x, y, z;
 
+        float _x() const { return x; };
+        float _y() const { return y; };
+        float _z() const { return z; };
+
         Vector operator+(const Vector &other) const;
         Vector operator-(const Vector &other) const;
         Vector operator*(float scalar) const;
         Vector operator/(float scalar) const;
+        Vector operator=(const Vector &other);
 
         Vector cross(const Vector &other) const;
         float dot(const Vector &other) const;
         float angle(const Vector &other) const;
 
         float length() const;
+        float length_squared() const;
+
+        Vector unit_vector(const Vector &v) const;
 
         Vector normalize() const;
 

@@ -15,13 +15,6 @@
 using namespace Raytracer::Core;
 
 namespace Raytracer::Primitives {
-    class hit_record {
-        public:
-            Vector p;
-            Vector normal;
-            float t;
-    };
-
     class Sphere : public IPrimitive {
         public:
             Sphere(const Vector &center, float radius);
@@ -29,7 +22,7 @@ namespace Raytracer::Primitives {
 
             Vector ray_color(const Ray &ray) override;
 
-            bool hit_sphere(const Vector &center, float radius, const Ray &ray);
+            float hit_sphere(const Vector &center, float radius, const Ray &ray);
 
             void setPosition(Vector vector) override;
             const Vector &getPosition() const noexcept override;

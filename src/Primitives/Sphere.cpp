@@ -6,6 +6,9 @@
 */
 
 #include "Sphere.hpp"
+#include "../Core/Vector.hpp"
+
+#include <cmath>
 
 using namespace Raytracer::Primitives;
 
@@ -13,18 +16,26 @@ Sphere::Sphere(const Vector &center, float radius) : _center(center), _radius(ra
 
 Sphere::~Sphere() {}
 
-bool Sphere::hit_sphere(const Vector &center, float radius, const Raytracer::Core::Ray &ray) {
+float Sphere::hit_sphere(const Vector &center, float radius, const Raytracer::Core::Ray &ray) {
     Vector oc = ray.origin() - center;
     float a = ray.direction().dot(ray.direction());
-    float b = 2 * oc.dot(ray.direction());
+    float b = -2 * oc.dot(ray.direction());
     float c = oc.dot(oc) - radius * radius;
     float discriminant = b*b - 4*a*c;
-    return (discriminant > 0);
+
+    if (discriminant < 0)
+        return -1;
+    else
+        return (-b - std::sqrt(discriminant)) / (2 * a);
 }
 
 Vector Sphere::ray_color(const Ray &ray) {
-    if (hit_sphere(Vector(0,0,-1), 0.5, ray))
-        return Vector(1, 0, 0);
+    float t = hit_sphere(Vector(0,0,-1), 0.5, ray);
+    if (t > 0) {
+        Vector N = N.unit_vector((ray.at(t) - Vector(0, 0, -1)));
+        return Vector(N._x() + 1, N._y() + 1, N._z() + 1) * 0.5;
+    }
+    
     return Vector(1.0, 1.0, 1.0);
 }
 

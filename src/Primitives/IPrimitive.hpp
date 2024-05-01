@@ -29,10 +29,12 @@ namespace Raytracer::Primitives {
             virtual const Core::Vector &getScale() const noexcept = 0;
 
             virtual void setMaterial(std::unique_ptr<Materials::IMaterial> material) = 0;
-            virtual std::optional<const Materials::IMaterial &> getMaterial() const noexcept = 0;
+         //   virtual std::optional<const Materials::IMaterial &> getMaterial() const noexcept = 0;
 
-            [[nodiscard]]
-            virtual std::optional<std::pair<Core::Intersection, Core::ColorShift>> intersect(const Core::Vector &rayOrigin, const Core::Vector &rayDirection) const noexcept = 0;
+            virtual Vector ray_color(const Core::Ray &ray) = 0;
+
+            // [[nodiscard]]
+            // virtual std::optional<std::pair<Core::Intersection, Core::ColorShift>> intersect(const Core::Vector &rayOrigin, const Core::Vector &rayDirection) const noexcept = 0;
     };
 }
 

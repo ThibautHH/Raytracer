@@ -42,6 +42,7 @@ $(NAME)_SRCS			:=	$(addprefix $(SRC_DIR), $(addsuffix $(SRC_EXT),	\
 								Termination									\
 								$(addprefix Core/,							\
 									Processor Vector)						\
+								$(addprefix Primitives/, Sphere)			\
 							))
 $($(NAME)_TESTS)_SRCS	:=	$(shell find $(TESTS_DIR) -type f				\
 							-name '*$(SRC_EXT)' ! -name ".*" 2>/dev/null)

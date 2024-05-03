@@ -12,7 +12,7 @@
 int main(int argc, char **argv)
 {
     if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <config_file>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <config_file>" << "\n  SCENE_FILE: scene configuration" << std::endl;
         return 84;
     }
 

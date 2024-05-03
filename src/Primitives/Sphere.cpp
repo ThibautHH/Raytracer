@@ -18,15 +18,15 @@ Sphere::~Sphere() {}
 
 float Sphere::hit_sphere(const Vector &center, float radius, const Raytracer::Core::Ray &ray) {
     Vector oc = ray.origin() - center;
-    float a = ray.direction().dot(ray.direction());
-    float b = -2 * oc.dot(ray.direction());
-    float c = oc.dot(oc) - radius * radius;
-    float discriminant = b*b - 4*a*c;
+    float a = ray.direction().length_squared();
+    float b = oc.dot(ray.direction());
+    float c = oc.length_squared() - radius * radius;
+    float discriminant = b*b - a*c;
 
     if (discriminant < 0)
         return -1;
     else
-        return (-b - std::sqrt(discriminant)) / (2 * a);
+        return (b - std::sqrt(discriminant)) / a;
 }
 
 Vector Sphere::ray_color(const Ray &ray) {

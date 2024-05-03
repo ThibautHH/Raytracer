@@ -10,6 +10,7 @@ obj/main.o
 obj/Termination.o
 obj/Core/Processor.o
 obj/Core/Vector.o
+obj/Primitives/Sphere.o
 
 
 # Ignore dependency files
@@ -17,6 +18,7 @@ obj/main.d
 obj/Termination.d
 obj/Core/Processor.d
 obj/Core/Vector.d
+obj/Primitives/Sphere.d
 
 
 # Ignore binary files

@@ -1,4 +1,4 @@
-name: Main workflow
+name: Status-checks workflow
 on:
   workflow_dispatch:
   pull_request:

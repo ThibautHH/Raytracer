@@ -100,11 +100,11 @@ CFLAGS					=	$(GCCFLAGS) -std=c99
 ifeq ($(LANG),cpp)
 COMPILER				:=	$(CXX)
 LINKER					:=	$(CXX)
-FLAGS					:=	$(CXXFLAGS)
+FLAGS					=	$(CXXFLAGS)
 else ifeq ($(LANG), c)
 COMPILER				:=	$(CC)
 LINKER					:=	$(CC)
-FLAGS					:=	$(CFLAGS)
+FLAGS					=	$(CFLAGS)
 endif
 LDLIBS					=	$(LIBS:%=-l%)
 LDFLAGS					=	$(LIB_DIRS:%=-L%)

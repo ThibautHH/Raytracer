@@ -94,7 +94,7 @@ GCCFLAGS				=	$(PCHFLAGS) $(PROJECT_INCLUDE_DIRS:%=-iquote %)	\
 							-Wnull-dereference -Wdouble-promotion -Wshadow	\
 							-Wformat=2 -Wpedantic -Winvalid-pch				\
 							-Wl,--no-undefined								\
-							-fno-gnu-unique $(if $($(NAME)_SHARED),,-fPIC)
+							-fno-gnu-unique $(if $($(NAME)_SHARED),-fPIC,)
 CXXFLAGS				=	$(GCCFLAGS) -std=c++20
 CFLAGS					=	$(GCCFLAGS) -std=c99
 ifeq ($(LANG),cpp)

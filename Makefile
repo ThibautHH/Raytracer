@@ -98,7 +98,7 @@ endif
 LDLIBS					=	$(LIBS:%=-l%)
 LDFLAGS					=	$(LIB_DIRS:%=-L%)
 
-all:					$(IGNORE_FILE) $($(NAME)_TARGET)
+all:					$($(NAME)_TARGET)
 	@:
 
 debug:					GCCFLAGS += -g

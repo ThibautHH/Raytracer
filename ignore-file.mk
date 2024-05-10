@@ -6,7 +6,7 @@
 ##
 
 IGNORE_FILE				:=	.gitignore
-IGNORED_FILES			:=
+IGNORED_FILES			:=	compile_commands.json
 ifndef $(NAME)_LINK
 IGNORED_FILES			+=  $($(NAME)_MAIN_SRC)
 endif
@@ -65,5 +65,7 @@ else
 endif
 	@echo -ne "$(subst $(nl),\n,$($@_CONTENT))" > $@
 	@sed -i -E 's/^ //g' $@
+
+all:			$(IGNORE_FILE)
 
 .PHONY:			$(IGNORE_FILE)

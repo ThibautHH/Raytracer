@@ -12,6 +12,12 @@ obj/Core/Processor.o
 obj/Core/Vector.o
 
 
+# Ignore precomiled headers
+obj/Termination.hpp.gch
+obj/Core/Processor.hpp.gch
+obj/Core/Vector.hpp.gch
+
+
 # Ignore dependency files
 obj/main.d
 obj/Termination.d
@@ -25,7 +31,8 @@ raytracer_tests
 a.out
 
 # Ignore logs and reports
-*.gc*
+*.gcda
+*.gcno
 vgcore.*
 
 # Ignore coding-style logs
@@ -36,7 +43,6 @@ coding-style-reports.log
 *~
 \#*#
 .#*
-*.swp
 
 # Miscellanous
 compile_commands.json

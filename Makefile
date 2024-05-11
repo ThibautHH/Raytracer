@@ -43,6 +43,8 @@ $(NAME)_SRCS			:=	$(addprefix $(SRC_DIR), $(addsuffix $(SRC_EXT),	\
 								Termination									\
 								$(addprefix Core/,							\
 									Processor Vector)						\
+								$(addprefix DynamicLibrary/,				\
+									DLLibrary)								\
 							))
 
 CODING_STYLE_LOG		:=	coding-style-reports.log

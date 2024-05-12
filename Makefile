@@ -173,6 +173,4 @@ fclean:					clean
 
 re:						fclean all
 
-.PHONY:					all debug tests_run tests_debug		\
-						coverage clean fclean re re_tests	\
-						docs coding-style $(IGNORE_FILE)
+.PHONY:					all debug clean fclean re docs coding-style

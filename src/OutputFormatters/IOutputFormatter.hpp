@@ -18,7 +18,7 @@ namespace Raytracer::OutputFormatters {
         public:
             ~IOutputFormatter() = default;
 
-            virtual std::ostream &write(std::ostream &os, const std::vector<const std::vector<Core::Color>> &framebuffer) const = 0;
+            virtual std::ostream &write(std::ostream &os, const std::vector<std::vector<Core::Color>> &framebuffer) const = 0;
     };
 }
 

@@ -8,6 +8,8 @@
 .SECONDEXPANSION:
 SRC_DIR					:=	src/
 OBJ_DIR					:=	obj/
+MODULES_DIR				:=	plugins/
+MOD_DIR					=	$(dir $(lastword $(MAKEFILE_LIST)))
 
 LANG					:=	cpp
 
@@ -35,6 +37,7 @@ LIB_EXT					:=	.a
 endif
 $(NAME)_TARGET			:=	$(NAME:%=lib%$(LIB_EXT))
 endif
+MODULE_TARGET			=	$(MODULES_DIR)$(NAME)_$(MODULE_NAME).so
 
 $(NAME)_DISPLAY			:=	Raytracer
 
@@ -66,8 +69,7 @@ RM						:=	rm -r
 AR						:=	ar
 ARFLAGS					:=	rcs
 CXX						:=	g++
-GCC						:=	gcc
-CC						:=	$(GCC)
+CC						:=	gcc
 DOCKER					:=	[ -r /var/run/docker.sock ] &&	\
 							[ -w /var/run/docker.sock ]
 DOCKER					:=	cmd="$$(which docker)"	\
@@ -84,26 +86,28 @@ GCCFLAGS				=	$(PCHFLAGS) $(PROJECT_INCLUDE_DIRS:%=-iquote %)	\
 							-Wduplicated-branches -Wlogical-op				\
 							-Wnull-dereference -Wdouble-promotion -Wshadow	\
 							-Wformat=2 -Wpedantic -Winvalid-pch				\
-							-Wl,--no-undefined								\
+							-Wl,--no-undefined -O3							\
 							$(if $($(NAME)_SHARED),-fPIC,)
 CXXFLAGS				=	$(GCCFLAGS) -std=c++20
 CFLAGS					=	$(GCCFLAGS) -std=c99
 ifeq ($(LANG),cpp)
 COMPILER				:=	$(CXX)
 LINKER					:=	$(CXX)
+GCC						:=	$(CXX)
 FLAGS					=	$(CXXFLAGS)
 else ifeq ($(LANG), c)
 COMPILER				:=	$(CC)
 LINKER					:=	$(CC)
+GCC						:=	$(CC)
 FLAGS					=	$(CFLAGS)
 endif
 LDLIBS					=	$(LIBS:%=-l%)
 LDFLAGS					=	$(LIB_DIRS:%=-L%)
 
-all:					$($(NAME)_TARGET)
+all:					$($(NAME)_TARGET) modules
 	@:
 
-debug:					GCCFLAGS += -g
+debug:					GCCFLAGS += -g -Og
 debug:					all
 
 $($(NAME)_TARGET):		$($(NAME)_OBJS)
@@ -131,6 +135,14 @@ endif
 
 -include $($(NAME)_MAIN_DEP) $($(NAME)_DEPS)
 
+modules:
+	@:
+
+$(MODULES_DIR)$(NAME)_%.so:	$$($$*_OBJS)
+	@-echo 'Linking $@ module...'
+	@mkdir -p $(dir $@)
+	@$(GCC) -shared -fPIC $(FLAGS) -o $@ $^ $(LDLIBS) $(LDFLAGS)
+
 SRC_BASE				=	$(if $(filter $(TESTS_DIR)%,$*),,$(SRC_DIR))
 
 $(OBJ_DIR)%$(DEP_EXT):	$$(SRC_BASE)%$(SRC_EXT)
@@ -149,6 +161,9 @@ $(OBJ_DIR)%$(OBJ_EXT):	$$(SRC_BASE)%$(SRC_EXT) $$(PCH)
 	@$(COMPILER) -c $(FLAGS) $< -o $@
 
 include tests.mk ignore-file.mk
+
+-include $(foreach component,. Configuration Lights Primitives Materials,	\
+	$(wildcard $(SRC_DIR)$(component)/Modules/*/module.mk))
 
 docs:					$(IGNORE_FILE)
 	@-echo 'Generating documentation...' >&2
@@ -173,6 +188,4 @@ fclean:					clean
 
 re:						fclean all
 
-.PHONY:					all debug tests_run tests_debug		\
-						coverage clean fclean re re_tests	\
-						docs coding-style $(IGNORE_FILE)
+.PHONY:					all modules debug clean fclean re docs coding-style

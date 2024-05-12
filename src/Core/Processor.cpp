@@ -9,8 +9,8 @@
 
 using namespace Raytracer::Core;
 
-Processor::Processor(std::unique_ptr<const Configuration::IConfiguration> configuration)
-    : _configuration(std::move(configuration))
+Processor::Processor(scene_ptr scene)
+    : _scene(std::move(scene))
 {
 }
 

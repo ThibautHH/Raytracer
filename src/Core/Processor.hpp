@@ -10,17 +10,18 @@
 
     #include <memory>
 
-    #include "../Configuration/IConfiguration.hpp"
+    #include "IScene.hpp"
 
 namespace Raytracer::Core {
     class Processor {
+        private:
+            typedef std::unique_ptr<const IScene> scene_ptr;
+            const scene_ptr _scene;
+
         public:
-            Processor(std::unique_ptr<const Configuration::IConfiguration> configuration);
+            Processor(scene_ptr scene);
 
             void render();
-
-        private:
-            const std::unique_ptr<const Configuration::IConfiguration> _configuration;
     };
 }
 

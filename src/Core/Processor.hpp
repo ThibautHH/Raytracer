@@ -8,10 +8,18 @@
 #ifndef RAYTRACER_CORE_PROCESSOR_HPP_
     #define RAYTRACER_CORE_PROCESSOR_HPP_
 
+    #include <memory>
+
+    #include "IScene.hpp"
+
 namespace Raytracer::Core {
     class Processor {
+        private:
+            typedef std::unique_ptr<const IScene> scene_ptr;
+            const scene_ptr _scene;
+
         public:
-            Processor(const char *configFile);
+            Processor(scene_ptr scene);
 
             void render();
     };

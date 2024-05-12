@@ -9,7 +9,8 @@
 
 using namespace Raytracer::Core;
 
-Processor::Processor(const char *)
+Processor::Processor(scene_ptr scene)
+    : _scene(std::move(scene))
 {
 }
 

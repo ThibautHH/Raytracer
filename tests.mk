@@ -12,7 +12,7 @@ $($(NAME)_TESTS)_SRCS	:=	$(shell find $(TESTS_DIR) -type f				\
 							-name '*$(SRC_EXT)' ! -name ".*" 2>/dev/null)
 
 $($(NAME)_TESTS)_OBJS	:=													\
-	$($($(NAME)_TESTS)_SRCS:$(SRC_DIR)%$(SRC_EXT)=$(OBJ_DIR)%$(OBJ_EXT))
+	$($($(NAME)_TESTS)_SRCS:%$(SRC_EXT)=$(OBJ_DIR)%$(OBJ_EXT))
 
 $($(NAME)_TESTS)_DEPS	:=	$($($(NAME)_TESTS)_OBJS:$(OBJ_EXT)=$(DEP_EXT))
 
@@ -40,8 +40,10 @@ $($($(NAME)_TESTS)_OBJS):	GCCFLAGS := $(filter-out --coverage,$(GCCFLAGS))
 TESTFLAGS				+=	$(TEST_SUITES:%=--filter '%/*')
 
 tests:					$(IGNORE_FILE) $($(NAME)_TESTS)
+ifdef $(NAME)_TEST_SCRIPT
 	@-echo 'Running test script...' >&2
 	@$($(NAME)_TEST_SCRIPT)
+endif
 	@-echo 'Running tests...' >&2
 	@./$($(NAME)_TESTS) --verbose $(TESTFLAGS)
 

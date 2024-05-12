@@ -39,7 +39,7 @@ $($($(NAME)_TESTS)_OBJS):	GCCFLAGS := $(filter-out --coverage,$(GCCFLAGS))
 
 TESTFLAGS				+=	$(TEST_SUITES:%=--filter '%/*')
 
-tests:					$(IGNORE_FILE) $($(NAME)_TESTS)
+tests:					$(IGNORE_FILE) modules $($(NAME)_TESTS)
 ifdef $(NAME)_TEST_SCRIPT
 	@-echo 'Running test script...' >&2
 	@$($(NAME)_TEST_SCRIPT)
@@ -48,12 +48,12 @@ endif
 	@./$($(NAME)_TESTS) --verbose $(TESTFLAGS)
 
 tests_run:				TESTFLAGS += --always-succeed
-tests_run:				$($(NAME)_TESTS)
+tests_run:				modules $($(NAME)_TESTS)
 	@./$($(NAME)_TESTS) --verbose $(TESTFLAGS)
 	@-find -type f \( -name '*.gcno' -o -name '*.gcda' \) -exec mv -- {} . \;
 
 tests-debug:			GCCFLAGS += -g
-tests-debug:			$($(NAME)_TESTS)
+tests-debug:			modules $($(NAME)_TESTS)
 	@-echo 'Debugging tests...' >&2
 	@-valgrind --trace-children=yes	./$($(NAME)_TESTS) --verbose $(TESTFLAGS)
 

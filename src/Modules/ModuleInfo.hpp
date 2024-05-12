@@ -8,6 +8,8 @@
 #ifndef RAYTRACCER_MODULES_MODULEINFO_HPP_
     #define RAYTRACCER_MODULES_MODULEINFO_HPP_
 
+    #include <algorithm>
+    #include <functional>
     #include <list>
     #include <memory>
 
@@ -34,11 +36,16 @@ namespace Raytracer::Modules {
                 _materials(std::forward<MaterialInfos>(materials))
             {}
 
-            const std::list<std::unique_ptr<IConfigurationReaderInfo>> &getConfigurationReaders() const noexcept;
-
-            const std::list<std::unique_ptr<ILightInfo>> &getLights() const noexcept;
-            const std::list<std::unique_ptr<IPrimitiveInfo>> &getPrimitives() const noexcept;
-            const std::list<std::unique_ptr<IMaterialInfo>> &getMaterials() const noexcept;
+            template<typename ComponentInfo>
+            std::optional<std::reference_wrapper<const ComponentInfo>> tryGetComponentInfo(std::string_view componentType) const
+            {
+                auto it = std::find_if(_configurationReaders.cbegin(), _configurationReaders.cend(), [componentType](const auto &info) {
+                    return info->getName() == componentType;
+                });
+                return it != _configurationReaders.cend()
+                    ? std::optional<std::reference_wrapper<const ComponentInfo>>(std::ref(**it))
+                    : std::nullopt;
+            }
 
         private:
             const std::list<std::unique_ptr<IConfigurationReaderInfo>> _configurationReaders;

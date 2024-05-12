@@ -27,7 +27,7 @@ namespace Raytracer::Modules {
         public:
             virtual ~IComponentInfo() = default;
 
-            virtual std::string_view getName() const noexcept = 0;
+            virtual constexpr std::string_view getName() const noexcept = 0;
             virtual std::unique_ptr<IComponentFactory<Component, Configuration>> createFactory() const = 0;
     };
 

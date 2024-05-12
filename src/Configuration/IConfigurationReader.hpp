@@ -8,6 +8,8 @@
 #ifndef RAYTRACER_CONFIGURATION_ICONFIGURATIONREADER_HPP_
     #define RAYTRACER_CONFIGURATION_ICONFIGURATIONREADER_HPP_
 
+    #include <istream>
+
     #include "IConfiguration.hpp"
 
 namespace Raytracer::Configuration {
@@ -15,7 +17,7 @@ namespace Raytracer::Configuration {
         public:
             virtual ~IConfigurationReader() = default;
 
-            virtual std::unique_ptr<IConfiguration> readConfiguration(std::string_view path) const = 0;
+            virtual std::unique_ptr<IConfiguration> readConfiguration(std::istream &is) const = 0;
     };
 }
 

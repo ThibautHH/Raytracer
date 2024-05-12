@@ -65,7 +65,7 @@ LIBS					:=
 ifndef $(NAME)_LINK
 LIB_DIRS				+=	$(dir $($(NAME)_TARGET))
 endif
-RM						:=	rm -r
+RM						:=	rm -f
 AR						:=	ar
 ARFLAGS					:=	rcs
 CXX						:=	g++
@@ -175,16 +175,18 @@ coding-style:			fclean
 
 clean:
 	@-echo 'Deleting build directory...' >&2
-	@$(RM) -f $(OBJ_DIR)
+	@$(RM) -r $(OBJ_DIR)
 	@-echo 'Cleaning up unecessary files...' >&2
 	@-find \( -name '*~' -o -name 'vgcore.*' -o -name '*.gc*'	\
 	-o -name 'a.out' -o -name '$(CODING_STYLE_LOG)' \) -delete
 
 fclean:					clean
 	@-echo 'Deleting $($(NAME)_TARGET)...' >&2
-	@$(RM) -f $($(NAME)_TARGET)
+	@$(RM) $($(NAME)_TARGET)
+	@-echo 'Deleting $(MODULES_DIR)...' >&2
+	@$(RM) -r $(MODULES_DIR)
 	@-echo 'Deleting $($(NAME)_TESTS)...' >&2
-	@$(RM) -f $($(NAME)_TESTS)
+	@$(RM) $($(NAME)_TESTS)
 
 re:						fclean all
 

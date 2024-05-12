@@ -27,13 +27,16 @@ namespace Raytracer::Modules {
             template<std::same_as<std::list<std::unique_ptr<IConfigurationReaderInfo>>> ConfigurationReaderInfos,
                 std::same_as<std::list<std::unique_ptr<ILightInfo>>> LightInfos,
                 std::same_as<std::list<std::unique_ptr<IPrimitiveInfo>>> PrimitiveInfos,
-                std::same_as<std::list<std::unique_ptr<IMaterialInfo>>> MaterialInfos>
+                std::same_as<std::list<std::unique_ptr<IMaterialInfo>>> MaterialInfos,
+                std::same_as<std::list<std::unique_ptr<IOutputFormatterInfo>>> OutputFormatterInfos>
             ModuleInfo(ConfigurationReaderInfos &&configurationReaders,
-                LightInfos &&lights, PrimitiveInfos &&primitives, MaterialInfos &&materials)
+                LightInfos &&lights, PrimitiveInfos &&primitives, MaterialInfos &&materials,
+                OutputFormatterInfos &&outputFormatters)
                 : _configurationReaders(std::forward<ConfigurationReaderInfos>(configurationReaders)),
                 _lights(std::forward<LightInfos>(lights)),
                 _primitives(std::forward<PrimitiveInfos>(primitives)),
-                _materials(std::forward<MaterialInfos>(materials))
+                _materials(std::forward<MaterialInfos>(materials)),
+                _outputFormatters(std::forward<OutputFormatterInfos>(outputFormatters))
             {}
 
             template<typename ComponentInfo>
@@ -53,6 +56,8 @@ namespace Raytracer::Modules {
             const std::list<std::unique_ptr<ILightInfo>> _lights;
             const std::list<std::unique_ptr<IPrimitiveInfo>> _primitives;
             const std::list<std::unique_ptr<IMaterialInfo>> _materials;
+
+            const std::list<std::unique_ptr<IOutputFormatterInfo>> _outputFormatters;
     };
 }
 

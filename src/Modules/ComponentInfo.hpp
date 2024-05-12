@@ -20,6 +20,8 @@
     #include "../Primitives/IPrimitiveConfiguration.hpp"
     #include "../Materials/IMaterial.hpp"
     #include "../Materials/IMaterialConfiguration.hpp"
+    #include "../OutputFormatters/IOutputFormatter.hpp"
+    #include "../OutputFormatters/IOutputFormatterConfiguration.hpp"
 
 namespace Raytracer::Modules {
     template<typename Component, typename Configuration>
@@ -45,6 +47,8 @@ namespace Raytracer::Modules {
     typedef IComponentInfo<Lights::ILight, Lights::ILightConfiguration> ILightInfo;
     typedef IComponentInfo<Primitives::IPrimitive, Primitives::IPrimitiveConfiguration> IPrimitiveInfo;
     typedef IComponentInfo<Materials::IMaterial, Materials::IMaterialConfiguration> IMaterialInfo;
+
+    typedef IComponentInfo<OutputFormatters::IOutputFormatter, OutputFormatters::IOutputFormatterConfiguration> IOutputFormatterInfo;
 }
 
 

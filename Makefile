@@ -66,8 +66,7 @@ RM						:=	rm -r
 AR						:=	ar
 ARFLAGS					:=	rcs
 CXX						:=	g++
-GCC						:=	gcc
-CC						:=	$(GCC)
+CC						:=	gcc
 DOCKER					:=	[ -r /var/run/docker.sock ] &&	\
 							[ -w /var/run/docker.sock ]
 DOCKER					:=	cmd="$$(which docker)"	\
@@ -91,10 +90,12 @@ CFLAGS					=	$(GCCFLAGS) -std=c99
 ifeq ($(LANG),cpp)
 COMPILER				:=	$(CXX)
 LINKER					:=	$(CXX)
+GCC						:=	$(CXX)
 FLAGS					=	$(CXXFLAGS)
 else ifeq ($(LANG), c)
 COMPILER				:=	$(CC)
 LINKER					:=	$(CC)
+GCC						:=	$(CC)
 FLAGS					=	$(CFLAGS)
 endif
 LDLIBS					=	$(LIBS:%=-l%)

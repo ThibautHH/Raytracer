@@ -14,8 +14,8 @@
     #include "../Core/Common.hpp"
     #include "../Core/Camera.hpp"
 
-    #include "../Lights/ILight.hpp"
-    #include "../Primitives/IPrimitive.hpp"
+    #include "../Lights/ILightConfiguration.hpp"
+    #include "../Primitives/IPrimitiveConfiguration.hpp"
 
 namespace Raytracer::Configuration {
     class IConfiguration {
@@ -26,9 +26,9 @@ namespace Raytracer::Configuration {
 
             virtual const Core::Camera &getCamera() const noexcept = 0;
 
-            virtual const std::list<std::unique_ptr<Primitives::IPrimitive>> &getPrimitives() const noexcept = 0;
+            virtual const std::list<std::unique_ptr<Primitives::IPrimitiveConfiguration>> &getPrimitives() const noexcept = 0;
 
-            virtual const std::list<std::unique_ptr<Lights::ILight>> &getLights() const noexcept = 0;
+            virtual const std::list<std::unique_ptr<Lights::ILightConfiguration>> &getLights() const noexcept = 0;
     };
 }
 

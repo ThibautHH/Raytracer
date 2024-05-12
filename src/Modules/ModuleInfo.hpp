@@ -24,11 +24,11 @@ namespace Raytracer::Modules {
      */
     class ModuleInfo {
         public:
-            template<std::same_as<std::list<std::unique_ptr<IConfigurationReaderInfo>>> ConfigurationReaderInfos,
-                std::same_as<std::list<std::unique_ptr<ILightInfo>>> LightInfos,
-                std::same_as<std::list<std::unique_ptr<IPrimitiveInfo>>> PrimitiveInfos,
-                std::same_as<std::list<std::unique_ptr<IMaterialInfo>>> MaterialInfos,
-                std::same_as<std::list<std::unique_ptr<IOutputFormatterInfo>>> OutputFormatterInfos>
+            template<std::same_as<std::list<std::unique_ptr<const IConfigurationReaderInfo>>> ConfigurationReaderInfos,
+                std::same_as<std::list<std::unique_ptr<const ILightInfo>>> LightInfos,
+                std::same_as<std::list<std::unique_ptr<const IPrimitiveInfo>>> PrimitiveInfos,
+                std::same_as<std::list<std::unique_ptr<const IMaterialInfo>>> MaterialInfos,
+                std::same_as<std::list<std::unique_ptr<const IOutputFormatterInfo>>> OutputFormatterInfos>
             ModuleInfo(ConfigurationReaderInfos &&configurationReaders,
                 LightInfos &&lights, PrimitiveInfos &&primitives, MaterialInfos &&materials,
                 OutputFormatterInfos &&outputFormatters)
@@ -51,13 +51,13 @@ namespace Raytracer::Modules {
             }
 
         private:
-            const std::list<std::unique_ptr<IConfigurationReaderInfo>> _configurationReaders;
+            const std::list<std::unique_ptr<const IConfigurationReaderInfo>> _configurationReaders;
 
-            const std::list<std::unique_ptr<ILightInfo>> _lights;
-            const std::list<std::unique_ptr<IPrimitiveInfo>> _primitives;
-            const std::list<std::unique_ptr<IMaterialInfo>> _materials;
+            const std::list<std::unique_ptr<const ILightInfo>> _lights;
+            const std::list<std::unique_ptr<const IPrimitiveInfo>> _primitives;
+            const std::list<std::unique_ptr<const IMaterialInfo>> _materials;
 
-            const std::list<std::unique_ptr<IOutputFormatterInfo>> _outputFormatters;
+            const std::list<std::unique_ptr<const IOutputFormatterInfo>> _outputFormatters;
     };
 }
 

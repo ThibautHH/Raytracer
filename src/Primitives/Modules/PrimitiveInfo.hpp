@@ -13,8 +13,8 @@
     #include "PrimitiveFactory.hpp"
 
 namespace Raytracer::Primitives::Modules {
-    template<const char type[], std::derived_from<IPrimitive> T>
-    class PrimitiveInfo : public Raytracer::Modules::AComponentInfo<type, IPrimitive, IPrimitiveConfiguration> {
+    template<std::derived_from<IPrimitive> T>
+    class PrimitiveInfo : public Raytracer::Modules::AComponentInfo<T::type, IPrimitive, IPrimitiveConfiguration> {
         public:
             std::unique_ptr<Raytracer::Modules::IComponentFactory<IPrimitive, IPrimitiveConfiguration>> createFactory() const final
             {

@@ -13,8 +13,8 @@
     #include "LightFactory.hpp"
 
 namespace Raytracer::Lights::Modules {
-    template<const char type[], std::derived_from<ILight> T>
-    class LightInfo : public Raytracer::Modules::AComponentInfo<type, ILight, ILightConfiguration> {
+    template<std::derived_from<ILight> T>
+    class LightInfo : public Raytracer::Modules::AComponentInfo<T::type, ILight, ILightConfiguration> {
         public:
             std::unique_ptr<Raytracer::Modules::IComponentFactory<ILight, ILightConfiguration>> createFactory() const final
             {

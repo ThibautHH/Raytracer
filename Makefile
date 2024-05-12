@@ -9,6 +9,11 @@
 SRC_DIR					:=	src/
 OBJ_DIR					:=	obj/
 MODULES_DIR				:=	plugins/
+MOD_DIRS				:=	Configuration	\
+							Lights			\
+							Primitives		\
+							Materials		\
+							OutputFormatters
 MOD_DIR					=	$(dir $(lastword $(MAKEFILE_LIST)))
 
 LANG					:=	cpp
@@ -42,12 +47,14 @@ MODULE_TARGET			=	$(MODULES_DIR)$(NAME)_$(MODULE_NAME).so
 $(NAME)_DISPLAY			:=	Raytracer
 
 $(NAME)_MAIN_SRC		:=	$(SRC_DIR)main$(SRC_EXT)
-$(NAME)_SRCS			:=	$(addprefix $(SRC_DIR), $(addsuffix $(SRC_EXT),	\
+$(NAME)_SRCS			:=	$(addsuffix $(SRC_EXT),$(addprefix $(SRC_DIR),	\
 								Termination									\
 								$(addprefix Core/,							\
 									Processor Vector)						\
 								$(addprefix DynamicLibrary/,				\
 									DLLibrary)								\
+								$(addprefix Modules/,						\
+									Module)									\
 							))
 
 CODING_STYLE_LOG		:=	coding-style-reports.log
@@ -162,7 +169,7 @@ $(OBJ_DIR)%$(OBJ_EXT):	$$(SRC_BASE)%$(SRC_EXT) $$(PCH)
 
 include tests.mk ignore-file.mk
 
--include $(foreach component,. Configuration Lights Primitives Materials,	\
+-include $(foreach component,. $(MOD_DIRS),	\
 	$(wildcard $(SRC_DIR)$(component)/Modules/*/module.mk))
 
 docs:					$(IGNORE_FILE)

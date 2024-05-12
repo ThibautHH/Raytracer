@@ -13,8 +13,8 @@
     #include "ConfigurationReaderFactory.hpp"
 
 namespace Raytracer::Configuration::Modules {
-    template<const char type[], std::derived_from<IConfigurationReader> T>
-    class ConfigurationReaderInfo : public Raytracer::Modules::AComponentInfo<type, IConfigurationReader, IComponentConfiguration> {
+    template<std::derived_from<IConfigurationReader> T>
+    class ConfigurationReaderInfo : public Raytracer::Modules::AComponentInfo<T::type, IConfigurationReader, IComponentConfiguration> {
         public:
             std::unique_ptr<Raytracer::Modules::IComponentFactory<IConfigurationReader, IComponentConfiguration>> createFactory() const final
             {

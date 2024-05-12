@@ -27,10 +27,12 @@ namespace Raytracer::Modules {
     template<typename Component, typename Configuration>
     class IComponentInfo {
         public:
+            typedef std::unique_ptr<IComponentFactory<Component, Configuration>> factory_ptr;
+
             virtual ~IComponentInfo() = default;
 
             virtual constexpr std::string_view getName() const noexcept = 0;
-            virtual std::unique_ptr<IComponentFactory<Component, Configuration>> createFactory() const = 0;
+            virtual factory_ptr createFactory() const = 0;
     };
 
     template<const char type[], typename Component, typename Configuration>

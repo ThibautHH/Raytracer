@@ -11,14 +11,18 @@ obj/Termination.o
 obj/Core/Processor.o
 obj/Core/Vector.o
 obj/DynamicLibrary/DLLibrary.o
+obj/Modules/Module.o
 obj/tests/DynamicLibrary/DLLibrary.o
+obj/OutputFormatters/Modules/PPM/OutputFormatter.o
 
 # Ignore precomiled headers
 obj/Termination.hpp.gch
 obj/Core/Processor.hpp.gch
 obj/Core/Vector.hpp.gch
 obj/DynamicLibrary/DLLibrary.hpp.gch
+obj/Modules/Module.hpp.gch
 obj/tests/DynamicLibrary/DLLibrary.hpp.gch
+obj/OutputFormatters/Modules/PPM/OutputFormatter.hpp.gch
 
 # Ignore dependency files
 obj/main.d
@@ -26,11 +30,14 @@ obj/Termination.d
 obj/Core/Processor.d
 obj/Core/Vector.d
 obj/DynamicLibrary/DLLibrary.d
+obj/Modules/Module.d
 obj/tests/DynamicLibrary/DLLibrary.d
+obj/OutputFormatters/Modules/PPM/OutputFormatter.d
 
 # Ignore binary files
 raytracer
 raytracer_tests
+plugins/raytracer_ppm.so
 
 # Ignore logs and reports
 *.gcda

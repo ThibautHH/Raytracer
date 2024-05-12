@@ -13,8 +13,8 @@
     #include "OutputFormatterFactory.hpp"
 
 namespace Raytracer::OutputFormatters::Modules {
-    template<const char type[], std::derived_from<IOutputFormatter> T>
-    class OutputFormatterInfo : public Raytracer::Modules::AComponentInfo<type, IOutputFormatter, IOutputFormatterConfiguration> {
+    template<std::derived_from<IOutputFormatter> T>
+    class OutputFormatterInfo : public Raytracer::Modules::AComponentInfo<T::type, IOutputFormatter, IOutputFormatterConfiguration> {
         public:
             std::unique_ptr<Raytracer::Modules::IComponentFactory<IOutputFormatter, IOutputFormatterConfiguration>> createFactory() const final
             {

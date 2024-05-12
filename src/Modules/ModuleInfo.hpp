@@ -24,11 +24,11 @@ namespace Raytracer::Modules {
      */
     class ModuleInfo {
         public:
-            template<std::same_as<std::list<std::unique_ptr<IConfigurationReaderInfo>>> ConfigurationReaderInfos,
-                std::same_as<std::list<std::unique_ptr<ILightInfo>>> LightInfos,
-                std::same_as<std::list<std::unique_ptr<IPrimitiveInfo>>> PrimitiveInfos,
-                std::same_as<std::list<std::unique_ptr<IMaterialInfo>>> MaterialInfos,
-                std::same_as<std::list<std::unique_ptr<IOutputFormatterInfo>>> OutputFormatterInfos>
+            template<std::same_as<std::list<std::unique_ptr<const IConfigurationReaderInfo>>> ConfigurationReaderInfos,
+                std::same_as<std::list<std::unique_ptr<const ILightInfo>>> LightInfos,
+                std::same_as<std::list<std::unique_ptr<const IPrimitiveInfo>>> PrimitiveInfos,
+                std::same_as<std::list<std::unique_ptr<const IMaterialInfo>>> MaterialInfos,
+                std::same_as<std::list<std::unique_ptr<const IOutputFormatterInfo>>> OutputFormatterInfos>
             ModuleInfo(ConfigurationReaderInfos &&configurationReaders,
                 LightInfos &&lights, PrimitiveInfos &&primitives, MaterialInfos &&materials,
                 OutputFormatterInfos &&outputFormatters)
@@ -42,22 +42,38 @@ namespace Raytracer::Modules {
             template<typename ComponentInfo>
             std::optional<std::reference_wrapper<const ComponentInfo>> tryGetComponentInfo(std::string_view componentType) const
             {
-                auto it = std::find_if(_configurationReaders.cbegin(), _configurationReaders.cend(), [componentType](const auto &info) {
+                const auto &list = getComponentInfos<ComponentInfo>();
+                auto it = std::find_if(list.cbegin(), list.cend(), [componentType](const auto &info) {
                     return info->getName() == componentType;
                 });
-                return it != _configurationReaders.cend()
+                return it != list.cend()
                     ? std::optional<std::reference_wrapper<const ComponentInfo>>(std::ref(**it))
                     : std::nullopt;
             }
 
         private:
-            const std::list<std::unique_ptr<IConfigurationReaderInfo>> _configurationReaders;
+            template<std::same_as<IConfigurationReaderInfo> ComponentInfo>
+            constexpr const std::list<std::unique_ptr<const ComponentInfo>> &getComponentInfos() const noexcept
+            { return _configurationReaders; }
+            const std::list<std::unique_ptr<const IConfigurationReaderInfo>> _configurationReaders;
 
-            const std::list<std::unique_ptr<ILightInfo>> _lights;
-            const std::list<std::unique_ptr<IPrimitiveInfo>> _primitives;
-            const std::list<std::unique_ptr<IMaterialInfo>> _materials;
+            template<std::same_as<ILightInfo> ComponentInfo>
+            constexpr const std::list<std::unique_ptr<const ComponentInfo>> &getComponentInfos() const noexcept
+            { return _lights; }
+            const std::list<std::unique_ptr<const ILightInfo>> _lights;
+            template<std::same_as<IPrimitiveInfo> ComponentInfo>
+            constexpr const std::list<std::unique_ptr<const ComponentInfo>> &getComponentInfos() const noexcept
+            { return _primitives; }
+            const std::list<std::unique_ptr<const IPrimitiveInfo>> _primitives;
+            template<std::same_as<IMaterialInfo> ComponentInfo>
+            constexpr const std::list<std::unique_ptr<const ComponentInfo>> &getComponentInfos() const noexcept
+            { return _materials; }
+            const std::list<std::unique_ptr<const IMaterialInfo>> _materials;
 
-            const std::list<std::unique_ptr<IOutputFormatterInfo>> _outputFormatters;
+            template<std::same_as<IOutputFormatterInfo> ComponentInfo>
+            constexpr const std::list<std::unique_ptr<const ComponentInfo>> &getComponentInfos() const noexcept
+            { return _outputFormatters; }
+            const std::list<std::unique_ptr<const IOutputFormatterInfo>> _outputFormatters;
     };
 }
 

@@ -13,8 +13,8 @@
     #include "MaterialFactory.hpp"
 
 namespace Raytracer::Materials::Modules {
-    template<const char type[], std::derived_from<IMaterial> T>
-    class MaterialInfo : public Raytracer::Modules::AComponentInfo<type, IMaterial, IMaterialConfiguration> {
+    template<std::derived_from<IMaterial> T>
+    class MaterialInfo : public Raytracer::Modules::AComponentInfo<T::type, IMaterial, IMaterialConfiguration> {
         public:
             std::unique_ptr<Raytracer::Modules::IComponentFactory<IMaterial, IMaterialConfiguration>> createFactory() const final
             {

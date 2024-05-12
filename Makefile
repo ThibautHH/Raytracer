@@ -84,7 +84,7 @@ GCCFLAGS				=	$(PCHFLAGS) $(PROJECT_INCLUDE_DIRS:%=-iquote %)	\
 							-Wduplicated-branches -Wlogical-op				\
 							-Wnull-dereference -Wdouble-promotion -Wshadow	\
 							-Wformat=2 -Wpedantic -Winvalid-pch				\
-							-Wl,--no-undefined								\
+							-Wl,--no-undefined -O3							\
 							$(if $($(NAME)_SHARED),-fPIC,)
 CXXFLAGS				=	$(GCCFLAGS) -std=c++20
 CFLAGS					=	$(GCCFLAGS) -std=c99
@@ -103,7 +103,7 @@ LDFLAGS					=	$(LIB_DIRS:%=-L%)
 all:					$($(NAME)_TARGET)
 	@:
 
-debug:					GCCFLAGS += -g
+debug:					GCCFLAGS += -g -Og
 debug:					all
 
 $($(NAME)_TARGET):		$($(NAME)_OBJS)

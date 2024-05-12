@@ -11,6 +11,7 @@ obj/Termination.o
 obj/Core/Processor.o
 obj/Core/Vector.o
 obj/DynamicLibrary/DLLibrary.o
+obj/Modules/ModuleInfo.o
 obj/tests/DynamicLibrary/DLLibrary.o
 
 # Ignore precomiled headers
@@ -18,6 +19,7 @@ obj/Termination.hpp.gch
 obj/Core/Processor.hpp.gch
 obj/Core/Vector.hpp.gch
 obj/DynamicLibrary/DLLibrary.hpp.gch
+obj/Modules/ModuleInfo.hpp.gch
 obj/tests/DynamicLibrary/DLLibrary.hpp.gch
 
 # Ignore dependency files
@@ -26,6 +28,7 @@ obj/Termination.d
 obj/Core/Processor.d
 obj/Core/Vector.d
 obj/DynamicLibrary/DLLibrary.d
+obj/Modules/ModuleInfo.d
 obj/tests/DynamicLibrary/DLLibrary.d
 
 # Ignore binary files
